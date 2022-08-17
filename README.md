@@ -16,3 +16,4 @@ para intercambiar los comandos de consola de linux por los de otro sistema opera
 Teniendo los tres archivos en un mismo directorio compilar con
 ```
 gcc proyecto_poke.c -lm
+```
