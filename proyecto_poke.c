@@ -261,56 +261,57 @@ typedef struct{
 			FILE* database;
 			database = fopen("database.txt","r+");
 			int npkmn = 15; //numero de pokemones en la base de datos, si se agrega o se quita algun pokemon cambiar este numero
-			Pokemon pokemones[npkmn]; // almacena los pokemones de la database
+			Pokemon* pokemones = (Pokemon*)malloc(npkmn * sizeof(Pokemon)); // almacena los pokemones de la database
 			pokemon_database(database, pokemones, npkmn);
 			fclose(database);
 
 			//seleccion de pokemon y de nombre
-				format();
-				printf("                                                                                   Player 1 is a CPU?\n                                                                                          no[1]\n                                                                                          yes[2]\n");
-				*cPU1 = scanf_check(1,2) - 1;
-        		printf("                                                                                   Player 2 is a CPU?\n                                                                                          no[1]\n                                                                                          yes[2]\n");
-				*cPU2 = scanf_check(1,2) - 1;
-				getchar();
-				name_selection(name);
-				for(i = 0; i < pkmn_format; ++i){ // pide el pokemon respectivo para player1 o player2
-					char p[4];
-					switch(i){
-					case 0: strcpy(p, "1st"); break;
-					case 1: strcpy(p, "2nd"); break;
-					case 2: strcpy(p, "3rd"); break;
-					case 3: strcpy(p, "4th"); break;
-					case 4: strcpy(p, "5th"); break;
-					case 5: strcpy(p, "6th"); break;
-					}
-					for(j = 0; j < 2; ++j){
-						do{
-							system("clear");
-							sprintf(buffer,"%s:\n", name[j]);
-							phrase_positioning(buffer, 92, 1);
-							sprintf(buffer,"Choose your %s pokemon\n", p);
-							phrase_positioning(buffer, 92, 1);
-							for(k = 0; k < npkmn; ++k){
-								printf("                                                                     ");
-								for(l = 0; l < 3 && k < npkmn; ++l, ++k){
-									sprintf(buffer,"%s[%d]", pokemones[k].name, k);
-									printf("%s",buffer);
-									name_large(strlen(buffer));
-								}
-								printf("\n");
-								--k;
-							}
-							printf("                                                                     Random[%d]\n", npkmn);
-							if(*cPU1 && j == 0) o = npkmn;
-							else if(*cPU2 && j == 1) o = npkmn;
-							else scanf("%d", &o);
-						} while(o < 0 || o > npkmn);
-						if(o < npkmn) team[i+(pkmn_format*j)] = pokemones[o]; // coloca los pokemones en el team ([0,npkmn-1])
-						else team[i+(pkmn_format*j)] = pokemones[(1 + rand()%(npkmn - 1))];
-					}
+			format();
+			printf("                                                                                   Player 1 is a CPU?\n                                                                                          no[1]\n                                                                                          yes[2]\n");
+			*cPU1 = scanf_check(1,2) - 1;
+			printf("                                                                                   Player 2 is a CPU?\n                                                                                          no[1]\n                                                                                          yes[2]\n");
+			*cPU2 = scanf_check(1,2) - 1;
+			getchar();
+			name_selection(name);
+			for(i = 0; i < pkmn_format; ++i){ // pide el pokemon respectivo para player1 o player2
+				char p[4];
+				switch(i){
+				case 0: strcpy(p, "1st"); break;
+				case 1: strcpy(p, "2nd"); break;
+				case 2: strcpy(p, "3rd"); break;
+				case 3: strcpy(p, "4th"); break;
+				case 4: strcpy(p, "5th"); break;
+				case 5: strcpy(p, "6th"); break;
 				}
-				pkmn[0] = team[0]; // informacion que se usara en la batalla pokemon
-				pkmn[1] = team[pkmn_format];
+				for(j = 0; j < 2; ++j){
+					do{
+						system("clear");
+						sprintf(buffer,"%s:\n", name[j]);
+						phrase_positioning(buffer, 92, 1);
+						sprintf(buffer,"Choose your %s pokemon\n", p);
+						phrase_positioning(buffer, 92, 1);
+						for(k = 0; k < npkmn; ++k){
+							printf("                                                                     ");
+							for(l = 0; l < 3 && k < npkmn; ++l, ++k){
+								sprintf(buffer,"%s[%d]", pokemones[k].name, k);
+								printf("%s",buffer);
+								name_large(strlen(buffer));
+							}
+							printf("\n");
+							--k;
+						}
+						printf("                                                                     Random[%d]\n", npkmn);
+						if(*cPU1 && j == 0) o = npkmn;
+						else if(*cPU2 && j == 1) o = npkmn;
+						else scanf("%d", &o);
+					} while(o < 0 || o > npkmn);
+					if(o < npkmn) team[i+(pkmn_format*j)] = pokemones[o]; // coloca los pokemones en el team ([0,npkmn-1])
+					else team[i+(pkmn_format*j)] = pokemones[(1 + rand()%(npkmn - 1))];
+				}
+			}
+			pkmn[0] = team[0]; // informacion que se usara en la batalla pokemon
+			pkmn[1] = team[pkmn_format];
+			free(pokemones);
 		}
 
 	// player es el pokemon que esta actuando
