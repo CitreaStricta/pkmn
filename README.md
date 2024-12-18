@@ -1,22 +1,22 @@
-# Batallas pokemon por consola de comandos
-Proyecto del ramo Programacion 1 importado por la Universidad de Concepcion.
+# Batallas Pokémon por consola de comandos
+Proyecto del ramo Programación 1 importado por la Universidad de Concepción.
 
-El proyecto consistio de crear un clon del videojuego Pokemon.
+El proyecto consistió en crear un clon del videojuego Pokémon.
 
-El programa hace uso de comandos linux para su ejecucion.
+El programa hace uso de comandos Linux para su ejecución.
 
 ## Requerimientos
 - GCC
-- Anviente Linux
+- Ambiente Linux
 
-## Ejemplo de ejecucion
-Teniendo los tres archivos en un mismo directorio compilar con
+## Ejemplo de ejecución
+Teniendo los tres archivos en un mismo directorio, compilar con
 ```
 gcc proyecto_poke.c -lm
 ./a.out
 ```
 
-## En la ejecuciono
-El texto, ademas de los momentos donde se solicita hacer alguna seleccion y cuando el texto termina con un * (asterisco), avanza de forma automatica.
+## En la ejecución
+El texto, además de los momentos donde se solicita hacer alguna selección y cuando el texto termina con un * (asterisco), avanza de forma automática.
 
-Idealmente, se debe escalar la consola para permitir que las barras de vida de los dos pokemon esten a la izquierda de la consola y a la derecha de ella respectivamente.
+Idealmente, se debe escalar la consola para permitir que las barras de vida de los dos Pokémon estén a la izquierda de la consola y a la derecha de ella, respectivamente.
